@@ -1,0 +1,11 @@
+.positionImg{
+    position: absolute;
+
+    height: 120px;
+    width: 80px;
+}
+
+p{
+    font-weight: bold;
+    text-align: center;
+}
