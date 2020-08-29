@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
+const routes = require('./routes');
+
 //Instalar Redis y configurarlo.
 
 const PORT = process.env.PORT || 3000;
@@ -8,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/', /*armar y configurar el archivo routes */);
+app.use('/', routes);
 
 try {
     app.listen(PORT, () => {
