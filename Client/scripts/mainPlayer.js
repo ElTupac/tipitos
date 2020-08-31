@@ -288,7 +288,8 @@ window.onload = () => {
     }, 25);
 
     setInterval(() => {
-        updatePlayer(nickName, xPos.h, yPos.h, id);
+        const rawresponse = updatePlayer(nickName, xPos.h, yPos.h, id);
+        rawresponse.then(res => allPlayers = res);
     }, 2000);
 }
 

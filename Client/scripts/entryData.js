@@ -2,6 +2,8 @@ const URL = "http://127.0.0.1:3000/"
 
 const nickName = window.prompt("Ingresa tu nick");
 
+var allPlayers;
+
 var id;
 const rawres = createPlayer(nickName);
 rawres.then(res => {
@@ -25,7 +27,6 @@ function createPlayer(nick){
 }
 
 function updatePlayer(nick, xPos, yPos, theid){
-    console.log(theid);
     return fetch(`${URL}updateplayer/${theid}`, {
         method: "PUT",
         headers: {

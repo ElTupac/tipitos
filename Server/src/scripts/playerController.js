@@ -1,5 +1,10 @@
 const Player = require("./playerSchema");
-const e = require("express");
+
+var allPlayers;
+setInterval(() => {
+    Player.find()
+    .then(players => allPlayers = players)
+}, 2000);
 
 module.exports = {
     async newPlayer(req, res){
@@ -30,9 +35,8 @@ module.exports = {
                 }
             });
 
-            console.log(data.name, data.xPos, data.yPos);
-            return res.status(201); 
-            //TODO Devolver un mapa con las posiciones de los demas
+            //console.log(data.name, data.xPos, data.yPos);
+            return res.json(allPlayers);
         } catch (error) {
             console.log(error);
             return res.status(500);
