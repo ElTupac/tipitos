@@ -16,7 +16,12 @@ mongoose.connect(mongoCredentials, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log("MongoDb conectado");
+    console.log("MongoDb conectado");
+
+    //Empezar a pedir cosas sistematicamente
+    setInterval(() => {
+        
+    }, 1000);
 });
 
 const app = express();

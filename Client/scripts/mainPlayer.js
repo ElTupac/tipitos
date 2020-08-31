@@ -286,6 +286,10 @@ window.onload = () => {
         Player.parentElement.style.left = `${xPos.h}px`;
         Player.parentElement.style.top = `${yPos.h}px`;
     }, 25);
+
+    setInterval(() => {
+        updatePlayer(nickName, xPos.h, yPos.h, id);
+    }, 2000);
 }
 
 const timePerFrame = 100 //En ms

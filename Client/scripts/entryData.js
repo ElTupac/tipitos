@@ -2,8 +2,11 @@ const URL = "http://127.0.0.1:3000/"
 
 const nickName = window.prompt("Ingresa tu nick");
 
-const id = createPlayer(nickName);
-id.then(res => console.log(res));
+var id;
+const rawres = createPlayer(nickName);
+rawres.then(res => {
+    id = res;
+});
 
 
 //checkear que no haya un nombre igual antes de dejar entrar
@@ -18,5 +21,21 @@ function createPlayer(nick){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({name: `${nick}`})
+    }).then(res => res.json());
+}
+
+function updatePlayer(nick, xPos, yPos, theid){
+    console.log(theid);
+    return fetch(`${URL}updateplayer/${theid}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: `${nick}`,
+            xPos: `${xPos}`,
+            yPos: `${yPos}`
+        })
     }).then(res => res.json());
 }

@@ -15,6 +15,7 @@ routes.get('/', (req, res) => {
 //Aca van los controladores
 
 routes.post('/newplayer', playerController.newPlayer);
+routes.put('/updateplayer/:theid', playerController.updatePosPlayer);
 
 routes.get('/status', (req, res) => {
     res.send({status: 200});
