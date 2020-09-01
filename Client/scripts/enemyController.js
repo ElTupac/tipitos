@@ -6,8 +6,14 @@ class Enemy {
         this.id = itId;
         this.xPos = theXPos;
         this.yPos = theYPos;
+        this.newXPos = theXPos;
+        this.newYPos = theYPos;
 
-        this.agregarPersonaje(this.xPos, this.yPos);
+        this.domElemento = this.agregarPersonaje(this.xPos, this.yPos);
+
+        setInterval(() => {
+            this.updateProgre();
+        }, timePerMove);
     }
 
     agregarPersonaje(xPos, yPos){
@@ -22,14 +28,34 @@ class Enemy {
         `
 
         enemies.appendChild(element);
+
+        return document.getElementById(`${this.id}`);
     }
 
-    updatePosfea(xPos, yPos){
-        const elemento = document.getElementById(`${this.id}`);
-        elemento.style.left = `${xPos}px`;
-        elemento.style.top = `${yPos}px`;
-        this.xPos = xPos;
-        this.yPos = yPos;
+    updatePosfea(){
+        this.domElemento.style.left = `${this.xPos}px`;
+        this.domElemento.style.top = `${this.yPos}px`;
+    }
+
+    updateProgre(){
+        var change = false;
+        if(this.xPos > this.newXPos){
+            this.xPos = this.xPos - 10;
+            change = true;
+        }else if(this.xPos < this.newYPos){
+            this.xPos = this.xPos + 10;
+            change = true;
+        }
+
+        if(this.yPos > this.newYPos){
+            this.yPos = this.yPos - 10;
+            change = true;
+        }else if(this.yPos < this.newYPos){
+            this.yPos = this.yPos + 10;
+            change = true;
+        }
+
+        if(change) this.updatePosfea();
     }
 
     //TODO:
@@ -47,13 +73,14 @@ setTimeout(() => {
             enemies.forEach(enemy => {
                 if(element._id == enemy.id) {
                     exist = true;
-                    enemy.updatePosfea(element.xPos, element.yPos);
+                    enemy.newXPos = element.xPos;
+                    enemy.newYPos = element.yPos;
                 }
             })
             if(!exist && element._id != id) enemies.push(new Enemy(element.name, element._id, element.xPos, element.yPos));
         });
-    }, 2000);
-}, 3000);
+    }, 500);
+}, 500);
 
 //Checkear que todos los player que estan en pantalla sigan en la lista que envia el server
 //Si no estan eliminarlo mediante un metodo del mismo objeto

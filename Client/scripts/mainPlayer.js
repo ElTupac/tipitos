@@ -285,7 +285,7 @@ window.onload = () => {
 
         Player.parentElement.style.left = `${xPos.h}px`;
         Player.parentElement.style.top = `${yPos.h}px`;
-    }, 25);
+    }, timePerMove);
 
     setInterval(() => {
         dat = new Date();
@@ -294,6 +294,8 @@ window.onload = () => {
         rawresponse.then(res => allPlayers = res);
     }, 2000);
 }
+
+const timePerMove = 25;
 
 const timePerFrame = 100 //En ms
 var frameCounter;
