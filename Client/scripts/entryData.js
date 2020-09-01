@@ -3,10 +3,10 @@ const URL = "http://186.13.4.194:3000/"
 const nickName = window.prompt("Ingresa tu nick");
 
 var dat = new Date();
-var seconds = 1000;
-var minutes = seconds * 60;
-var hours = minutes * 60;
-var days = hours * 24;
+const seconds = 1000;
+const minutes = seconds * 60;
+const hours = minutes * 60;
+const days = hours * 24;
 var time = (dat.getTime() % days);
 
 var allPlayers;
