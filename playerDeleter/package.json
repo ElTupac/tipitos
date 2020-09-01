@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node eliminador.js",
-    "dev": "./nodemon eliminador.js"
+    "start": "node eliminador.js",
+    "dev": "nodemon eliminador.js"
   },
   "keywords": [],
   "author": "",
