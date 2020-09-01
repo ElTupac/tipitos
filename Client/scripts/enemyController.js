@@ -15,7 +15,7 @@ class Enemy {
         const element = document.createElement('div');
 
         element.innerHTML = `
-            <div id="${this.id}" style="position: absolute; left: ${this.xPos}px; top: ${this.yPos}px">
+            <div id="${this.id}" style="position: absolute; left: ${xPos}px; top: ${yPos}px">
                 <p>${this.nickName}</p>
                 <img src="../images/character/walk/down/down0.png" alt="kk" class="positionImg">
             </div>
@@ -31,6 +31,10 @@ class Enemy {
         this.xPos = xPos;
         this.yPos = yPos;
     }
+
+    //TODO:
+    //Tener un metodo que updatee los datos de posicion dentro del objeto
+    //Generar otro metodo aparte que valla generando el trazo por donde debe ir el personaje
 }
 
 var enemies = [];
@@ -50,3 +54,6 @@ setTimeout(() => {
         });
     }, 2000);
 }, 3000);
+
+//Checkear que todos los player que estan en pantalla sigan en la lista que envia el server
+//Si no estan eliminarlo mediante un metodo del mismo objeto

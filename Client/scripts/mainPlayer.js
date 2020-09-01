@@ -288,7 +288,9 @@ window.onload = () => {
     }, 25);
 
     setInterval(() => {
-        const rawresponse = updatePlayer(nickName, xPos.h, yPos.h, id);
+        dat = new Date();
+        time = (dat.getTime() % days);
+        const rawresponse = updatePlayer(nickName, xPos.h, yPos.h, id, time);
         rawresponse.then(res => allPlayers = res);
     }, 2000);
 }

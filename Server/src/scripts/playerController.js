@@ -15,7 +15,8 @@ module.exports = {
         const nuevoPlayer = new Player({
             name: data.name,
             xPos: 0,
-            yPos: 0
+            yPos: 0,
+            lastTime: data.time
         });
 
         nuevoPlayer.save(nuevoPlayer);
@@ -31,11 +32,12 @@ module.exports = {
             await Player.updateOne({_id: theid}, {
                 $set: {
                     xPos: data.xPos,
-                    yPos: data.yPos
+                    yPos: data.yPos,
+                    lastTime: data.time
                 }
             });
 
-            //console.log(data.name, data.xPos, data.yPos);
+            console.log(data.name, data.time);
             return res.json(allPlayers);
         } catch (error) {
             console.log(error);
