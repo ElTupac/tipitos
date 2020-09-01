@@ -54,7 +54,7 @@ class Enemy {
         if(this.xPos > this.newXPos){
             this.xPos = this.xPos - 10;
             change = true;
-        }else if(this.xPos < this.newYPos){
+        }else if(this.xPos < this.newXPos){
             this.xPos = this.xPos + 10;
             change = true;
         }

@@ -292,7 +292,7 @@ window.onload = () => {
         time = (dat.getTime() % days);
         const rawresponse = updatePlayer(nickName, xPos.h, yPos.h, id, time);
         rawresponse.then(res => allPlayers = res);
-    }, 2000);
+    }, 500);
 }
 
 const timePerMove = 25;
