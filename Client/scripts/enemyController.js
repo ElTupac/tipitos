@@ -10,7 +10,10 @@ class Enemy {
         this.newYPos = theYPos;
         this.lastTime = thelastTime;
 
+        this.currentAnim = null;
+
         this.domElemento = this.agregarPersonaje(this.xPos, this.yPos);
+        this.photoElemento = document.getElementById(`${this.id}_foto`);
 
         this.exist = true;
 
@@ -35,7 +38,7 @@ class Enemy {
         element.innerHTML = `
             <div id="${this.id}" style="position: absolute; left: ${xPos}px; top: ${yPos}px">
                 <p>${this.nickName}</p>
-                <img src="../images/character/walk/down/down0.png" alt="kk" class="positionImg">
+                <img src="../images/character/walk/down/down0.png" alt="kk" class="positionImg" id="${this.id}_foto">
             </div>
         `
 
@@ -51,6 +54,7 @@ class Enemy {
 
     updateProgre(){
         var change = false;
+    
         if(this.xPos > this.newXPos){
             this.xPos = this.xPos - 10;
             change = true;
@@ -68,6 +72,18 @@ class Enemy {
         }
 
         if(change) this.updatePosfea();
+        else if(!change && this.currentAnim){
+            clearInterval(this.currentAnim);
+            this.currentAnim = null;
+        }
+
+        if(!this.currentAnim && change){
+            if(this.xPos > this.newXPos) this.currentAnim = makeAnim(this.photoElemento, walkLeft);
+            else if(this.xPos < this.newXPos) this.currentAnim = makeAnim(this.photoElemento, walkRigth);
+            else if(this.yPos > this.newYPos) this.currentAnim = makeAnim(this.photoElemento, walkUp);
+            else if(this.yPos < this.newYPos) this.currentAnim = makeAnim(this.photoElemento, walkDown);
+        }
+        
     }
 
     checkTimeOut(){

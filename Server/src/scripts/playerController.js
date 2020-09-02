@@ -37,7 +37,6 @@ module.exports = {
                 }
             });
 
-            console.log(data.name, data.time);
             return res.json(allPlayers);
         } catch (error) {
             console.log(error);

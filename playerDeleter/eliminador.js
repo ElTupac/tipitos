@@ -16,7 +16,6 @@ db.once('open', function() {
     setInterval(() => {
         Player.find()
         .then(players => {
-            console.log("Checkeando");
             const time = timeNow();
             var contador = 0;
 
@@ -27,7 +26,7 @@ db.once('open', function() {
                         if(err){
                             console.log(err);
                         }else{
-                            console.log("Deleted " + doc._id);
+                            console.log(`Deleted { ${doc._id} , ${doc.name} }`);
                             contador++;
                         }
                     });
