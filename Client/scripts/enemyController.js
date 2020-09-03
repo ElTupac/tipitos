@@ -114,7 +114,7 @@ setTimeout(() => {
             })
             if(!exist && element._id != id) enemies.push(new Enemy(element.name, element._id, element.xPos, element.yPos, element.lastTime));
         });
-    }, 500);
+    }, 250);
 
     setInterval(() => {
         var h = 0;
@@ -124,7 +124,7 @@ setTimeout(() => {
             }else h++;
         }
     }, 5000);
-}, 500);
+}, 250);
 
 //Checkear que todos los player que estan en pantalla sigan en la lista que envia el server
 //Si no estan eliminarlo mediante un metodo del mismo objeto
