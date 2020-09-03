@@ -1,6 +1,9 @@
 const Player = require('./playerSchema');
 const Event = require('./eventSchema');
 
+const heigth = 120;
+const width = 80;
+
 var allPlayers;
 var allEvents;
 
@@ -23,9 +26,63 @@ module.exports = {
     },
 
     async postEvento(req, res){
+        const eventData = req.body;
 
+        if(eventData.event == "attack"){
+            var yHit;
+            var xHit;
+
+            switch(eventData.direction) {
+                case "left":
+                    if(eventData.xPos > (width/2)) xHit = eventData.xPos - (width/2);
+                    else xHit = eventData.xPos;
+                    yHit = eventData.yPos;
+                    break;
+
+                case "rigth":
+                    xHit = eventData.xPos + (width/2);
+                    yHit = eventData.yPos;
+                    break;
+
+                case "up":
+                    if(eventData.yPos > (heigth/2)) yHit = eventData.yPos - (heigth/2);
+                    else yHit = eventData.yPos;
+                    xHit = eventData.xPos;
+                    break;
+
+                case "down":
+                    yHit = eventData.yPos + (heigth/2);
+                    xHit = eventData.xPos;
+                    break;
+            }
+
+            const ataque = new Event({
+                playerId: eventData.id,
+                tipoEvento: eventData.event,
+                posX: eventData.xPos,
+                posY: eventData.yPos
+            });
+
+            ataque.save(ataque);
+
+            allPlayers.forEach(player => {
+                if(rangeCollision(xHit, (xHit+width), player.xPos, (player.xPos+width)) && rangeCollision(yHit, (yHit+heigth), player.yPos, (player.yPos+heigth))){
+                    //Golpearon a este player
+                    //Generar un evento de esto y guardarlo en la bd
+
+
+                }
+            });
+        }
+
+        return res.json({ok: false});
     }
     //geteventos tiene que devolver eventos hasta X tiempo hacia atras
     //postEvento tiene que registrar un evento y relacionarlo a la posicion actual del jugador
     //comprobar si el evento genera otro evento, como la muerte de otro jugador.
+}
+
+function rangeCollision(min1, max1, min2, max2){
+    if((min2 > min1 && min2 < max1) || (max2 > min1 && max2 < max1)) return true;
+    else return false;
 }

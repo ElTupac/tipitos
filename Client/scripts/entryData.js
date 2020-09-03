@@ -54,7 +54,7 @@ function getEvents(){
     .then(res => res.json());
 }
 
-function postEvent(playerId, eventInfo){
+function postEvent(playerId, eventInfo, xPos, yPos, direction){
     dat = new Date();
     time = (dat.getTime() % days);
 
@@ -67,7 +67,10 @@ function postEvent(playerId, eventInfo){
         body: JSON.stringify({
             id: `${playerId}`,
             event: `${eventInfo}`,
-            time: `${time}`
+            time: `${time}`,
+            xPos: `${xPos}`,
+            yPos: `${yPos}`,
+            direction: `${direction}`
         })
     }).then(res => res.json());
 }
