@@ -20,7 +20,9 @@ window.onload = () => {
     var currentAnim;
     var attacking = false;
     var attackCD = false;
-    var attackMoveOnce = false;
+    //var attackMoveOnce = false;
+
+    const intervalTime = 250;
 
     const attackTimeCD = 750;
 
@@ -30,6 +32,9 @@ window.onload = () => {
         const keyDown = event.key;
         
         //event.preventDefault();
+        //Mas tarde usarlo para cuando se meta el modulo de chat
+        //Cuando se habilite el preventDefault hacer un keydown para la tecla f5 para hacer el refresh
+
         if(!attackCD && keyDown == "q"){
             attacking = true;
             attackCD = true;
@@ -292,7 +297,7 @@ window.onload = () => {
         time = (dat.getTime() % days);
         const rawresponse = updatePlayer(nickName, xPos.h, yPos.h, id, time);
         rawresponse.then(res => allPlayers = res);
-    }, 250);
+    }, intervalTime);
 }
 
 const timePerMove = 25;

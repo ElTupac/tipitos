@@ -1,5 +1,3 @@
-
-
 class Enemy {
     constructor(name, itId, theXPos, theYPos, thelastTime){
         this.nickName = name;
@@ -93,9 +91,6 @@ class Enemy {
         if((nowTime - this.lastTime) > 6000) return true;
         else return false;
     }
-    //TODO:
-    //Tener un metodo que updatee los datos de posicion dentro del objeto
-    //Generar otro metodo aparte que valla generando el trazo por donde debe ir el personaje
 }
 
 var enemies = [];
@@ -123,8 +118,5 @@ setTimeout(() => {
                 enemies.splice(h, 1);
             }else h++;
         }
-    }, 5000);
+    }, 2500);
 }, 250);
-
-//Checkear que todos los player que estan en pantalla sigan en la lista que envia el server
-//Si no estan eliminarlo mediante un metodo del mismo objeto
