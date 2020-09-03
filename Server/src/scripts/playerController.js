@@ -9,7 +9,6 @@ setInterval(() => {
 module.exports = {
     async newPlayer(req, res){
         //Creado de nuevo jugador
-        //TODO Checkear que no exista el mismo nombre
         const data = req.body;
 
         const nuevoPlayer = new Player({
