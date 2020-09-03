@@ -1,4 +1,5 @@
 const URL = "http://186.13.4.194:3000/"
+const eventURL = "http://186.13.4.194:3000/" 
 
 const nickName = window.prompt("Ingresa tu nick");
 
@@ -43,6 +44,29 @@ function updatePlayer(nick, xPos, yPos, theid, time){
             name: `${nick}`,
             xPos: `${xPos}`,
             yPos: `${yPos}`,
+            time: `${time}`
+        })
+    }).then(res => res.json());
+}
+
+function getEvents(){
+    return fetch(`${eventURL}events`)
+    .then(res => res.json());
+}
+
+function postEvent(playerId, eventInfo){
+    dat = new Date();
+    time = (dat.getTime() % days);
+
+    return fetch(`${eventURL}events`, {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: `${playerId}`,
+            event: `${eventInfo}`,
             time: `${time}`
         })
     }).then(res => res.json());
