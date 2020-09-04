@@ -1,3 +1,4 @@
+
 window.onload = () => {
 
     var vPHeight = getVPHeight();
@@ -43,12 +44,7 @@ window.onload = () => {
             if(currentMove != null) attackDirection = currentMove;
             else attackDirection = lastMove;
 
-            var evento = postEvent(id, "attack", xPos.h, yPos.h, attackDirection);
-            evento.then(res => {
-                if(res.ok){
-                    //res.ok es un bool que dice si le pego a alguien
-                }
-            })
+            postEvent(id, "attack", xPos.h, yPos.h, attackDirection);
 
             switch(attackDirection) {
                 case "left":
@@ -319,17 +315,52 @@ window.onload = () => {
                     //Si el cliente recibe un evento de golpeado a el se muere, SE MUERE
                     //Hacer la animacion del golpe donde esta el personaje
                     //Hacer la animacion de la muerte del personaje
+
+                    clearInterval(currentAnim);
+                    Player.src = "../images/character/death/death.png";
+
+                    new Hit(xPos.h, yPos.h, event._id);
                     
                     postEvent(id, "death", xPos.h, yPos.h, lastMove);
                 }
                 else if(event.tipoEvento == "golpeado"){
                     //Hacer la animacion del golpe en la posicion que esta como parametro
+                    var j = 0;
+                    var found = false;
+
+                    do {
+                        if(enemies[j].id == event.playerId){
+                            enemies[j].getHitted(event._id);
+                            found = true;
+                        }
+                        j++;
+                    } while (j < enemies.length && !found);
                 }
                 else if(event.playerId != id && event.tipoEvento == "attack"){
                     //Hacer la animacion del wachin atacando
+                    var j = 0;
+                    var found = false;
+
+                    do {
+                        if(enemies[j].id == event.playerId){
+                            enemies[j].attack(event.direction);
+                            found = true;
+                        }
+                        j++;
+                    } while (j < enemies.length && !found);
                 }
                 else if(event.playerId != id && event.tipoEvento == "death"){
                     //Hacer la animacion del wachin que se murio
+                    var j = 0;
+                    var found = false;
+
+                    do {
+                        if(enemies[j].id == event.playerId){
+                            enemies[j].death();
+                            found = true;
+                        }
+                        j++;
+                    } while (j < enemies.length && !found);
                 }
 
             })

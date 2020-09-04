@@ -7,7 +7,8 @@ const EventSchema = new Schema({
     tipoEvento: String,
     posX: Number,
     posY: Number,
-    time: Number
+    time: Number,
+    direction: String
 });
 
 module.exports = mongoose.model('event', EventSchema);

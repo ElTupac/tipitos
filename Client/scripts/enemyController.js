@@ -8,6 +8,9 @@ class Enemy {
         this.newYPos = theYPos;
         this.lastTime = thelastTime;
 
+        this.attacking = false;
+        this.alive = true;
+
         this.currentAnim = null;
 
         this.domElemento = this.agregarPersonaje(this.xPos, this.yPos);
@@ -48,6 +51,8 @@ class Enemy {
     updatePosfea(){
         this.domElemento.style.left = `${this.xPos}px`;
         this.domElemento.style.top = `${this.yPos}px`;
+
+        return;
     }
 
     updateProgre(){
@@ -69,19 +74,20 @@ class Enemy {
             change = true;
         }
 
-        if(change) this.updatePosfea();
-        else if(!change && this.currentAnim){
+        if(change && this.alive) this.updatePosfea();
+        else if(!change && this.currentAnim && !this.attacking){
             clearInterval(this.currentAnim);
             this.currentAnim = null;
         }
 
-        if(!this.currentAnim && change){
+        if(!this.currentAnim && change && this.alive){
             if(this.xPos > this.newXPos) this.currentAnim = makeAnim(this.photoElemento, walkLeft);
             else if(this.xPos < this.newXPos) this.currentAnim = makeAnim(this.photoElemento, walkRigth);
             else if(this.yPos > this.newYPos) this.currentAnim = makeAnim(this.photoElemento, walkUp);
             else if(this.yPos < this.newYPos) this.currentAnim = makeAnim(this.photoElemento, walkDown);
         }
         
+        return;
     }
 
     checkTimeOut(){
@@ -90,6 +96,82 @@ class Enemy {
 
         if((nowTime - this.lastTime) > 6000) return true;
         else return false;
+    }
+
+    getHitted(eventId){
+        return new Hit(this.xPos, this.yPos, eventId);
+    }
+
+    attack(direction){
+        this.attacking = true;
+        clearInterval(this.currentAnim);
+        switch (direction) {
+            case "left":
+                this.currentAnim = makeAnim(this.photoElemento, attackLeft);
+                break;
+            
+            case "rigth":
+                this.currentAnim = makeAnim(this.photoElemento, attackRigth);
+                break;
+
+            case "up":
+                this.currentAnim = makeAnim(this.photoElemento, attackUp);
+                break;
+
+            case "down":
+                this.currentAnim = makeAnim(this.photoElemento, attackDown);
+                break;
+
+        }
+
+        setTimeout(() => {
+            clearInterval(this.currentAnim);
+            this.attacking = false;
+            this.currentAnim = null;
+        }, (timePerFrame * 4));
+
+        return;
+    }
+
+    death(){
+        this.alive = false;
+        clearInterval(this.currentAnim);
+        this.currentAnim = null;
+        this.photoElemento.src = "../images/character/death/death.png";
+        return;
+    }
+}
+
+class Hit{
+    constructor(xPos, yPos, _id){
+        this.spawn(xPos, yPos, _id);
+        this.eraseSpawn(_id, 500);
+    }
+
+    spawn(X, Y, id){
+        const interactions = document.getElementById("interactions");
+        const element = document.createElement('div');
+
+        var yVariation = Y + 80;
+
+        element.innerHTML= `
+            <div id="${id}" style="position: absolute; left: ${X}px; top: ${yVariation}px">
+                <img src="../images/golpe.png" alt="kk" style="width: 97px; height: 60px;">
+            </div>
+        `
+
+        interactions.appendChild(element);
+
+        return document.getElementById(`${id}`);
+    }
+
+    eraseSpawn(id, time){
+        setTimeout(() => {
+            const element = document.getElementById(`${id}`);
+            element.parentElement.parentElement.removeChild(element.parentElement);
+        }, time);
+
+        return;
     }
 }
 
