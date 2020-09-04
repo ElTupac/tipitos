@@ -40,7 +40,6 @@ module.exports = {
                     break;
 
                 case "rigth":
-                    console.log(eventData.xPos);
                     xHit = parseInt(eventData.xPos) + (width/2);
                     yHit = eventData.yPos;
                     break;
@@ -52,7 +51,6 @@ module.exports = {
                     break;
 
                 case "down":
-                    console.log(eventData.yPos);
                     yHit = parseInt(eventData.yPos) + (heigth/2);
                     xHit = eventData.xPos;
                     break;
@@ -68,14 +66,11 @@ module.exports = {
                 time: eventData.time
             });
 
-            console.log("Ataque de " + eventData.id, eventData.direction);
             ataque.save(ataque);
 
             var hitteado = false;
 
-            console.log(xHit, yHit);
             allPlayers.forEach(player => {
-                if(player._id != eventData.id) console.log(player.xPos, player.yPos);
                 if(player._id != eventData.id && rangeCollision(xHit, (xHit+width), player.xPos, (player.xPos+width)) && rangeCollision(yHit, (yHit+heigth), player.yPos, (player.yPos+heigth))){
                     //Golpearon a este player
                     //Generar un evento de esto y guardarlo en la bd
@@ -93,7 +88,6 @@ module.exports = {
                     golpeado.save(golpeado);
                 }
             });
-            console.log(hitteado);
         }
         else if(eventData.event == "death"){
             const muerto = new Event({
