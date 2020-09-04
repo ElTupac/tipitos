@@ -25,18 +25,19 @@ window.onload = () => {
 
     const intervalTime = 250;
 
-    const attackTimeCD = 750;
+    const attackTimeCD = 500;
 
     var direction = {left: false, right: false, up: false, down: false};
 
     document.addEventListener('keydown', event => {
         const keyDown = event.key;
+        const keyCodeDown = event.code;
         
         //event.preventDefault();
         //Mas tarde usarlo para cuando se meta el modulo de chat
         //Cuando se habilite el preventDefault hacer un keydown para la tecla f5 para hacer el refresh
 
-        if(!attackCD && keyDown == "q" && notDeath){
+        if(!attackCD && keyCodeDown == "Space" && notDeath){
             attacking = true;
             attackCD = true;
             clearInterval(currentAnim);
