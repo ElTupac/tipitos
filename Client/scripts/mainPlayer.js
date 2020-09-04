@@ -43,12 +43,10 @@ window.onload = () => {
             if(currentMove != null) attackDirection = currentMove;
             else attackDirection = lastMove;
 
-            var evento = postEvent(id, "attack", xPos, yPos, attackDirection);
+            var evento = postEvent(id, "attack", xPos.h, yPos.h, attackDirection);
             evento.then(res => {
                 if(res.ok){
                     //res.ok es un bool que dice si le pego a alguien
-                    //si res.ok es true tiene que tener tambien los parametros res.xPos y res.yPos
-                    //En esos parametros hacer spawn de una animacion del golpe.
                 }
             })
 

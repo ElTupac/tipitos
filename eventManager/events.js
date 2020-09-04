@@ -40,7 +40,8 @@ module.exports = {
                     break;
 
                 case "rigth":
-                    xHit = eventData.xPos + (width/2);
+                    console.log(eventData.xPos);
+                    xHit = parseInt(eventData.xPos) + (width/2);
                     yHit = eventData.yPos;
                     break;
 
@@ -51,9 +52,12 @@ module.exports = {
                     break;
 
                 case "down":
-                    yHit = eventData.yPos + (heigth/2);
+                    console.log(eventData.yPos);
+                    yHit = parseInt(eventData.yPos) + (heigth/2);
                     xHit = eventData.xPos;
                     break;
+
+                //tuve que poner los parseInt en esas sumas porque forzaba un string y concatenaba los valores
             }
 
             const ataque = new Event({
@@ -64,11 +68,15 @@ module.exports = {
                 time: eventData.time
             });
 
+            console.log("Ataque de " + eventData.id, eventData.direction);
             ataque.save(ataque);
 
             var hitteado = false;
+
+            console.log(xHit, yHit);
             allPlayers.forEach(player => {
-                if(rangeCollision(xHit, (xHit+width), player.xPos, (player.xPos+width)) && rangeCollision(yHit, (yHit+heigth), player.yPos, (player.yPos+heigth))){
+                if(player._id != eventData.id) console.log(player.xPos, player.yPos);
+                if(player._id != eventData.id && rangeCollision(xHit, (xHit+width), player.xPos, (player.xPos+width)) && rangeCollision(yHit, (yHit+heigth), player.yPos, (player.yPos+heigth))){
                     //Golpearon a este player
                     //Generar un evento de esto y guardarlo en la bd
 
@@ -81,10 +89,27 @@ module.exports = {
                         time: eventData.time
                     });
 
+                    console.log("Golpeado " + player._id);
                     golpeado.save(golpeado);
                 }
             });
+            console.log(hitteado);
         }
+        else if(eventData.event == "death"){
+            const muerto = new Event({
+                playerId: eventData.id,
+                tipoEvento: eventData.event,
+                posX: eventData.xPos,
+                posY: eventData.yPos,
+                time: eventData.time
+            });
+        }
+
+        //Al final se pide de nuevo todos los eventos para actualizarlos en tiempo real
+        //Sino podemos generar que ciertos eventos se pierdan por el tiempo de intervalo
+
+        Event.find()
+        .then(events => allEvents = events);
 
         return res.json({ok: false});
     }
