@@ -70,7 +70,7 @@ module.exports = {
             var hitteado = false;
 
             allPlayers.forEach(player => {
-                if(player._id != eventData.id && rangeCollision(xHit, parseInt(xHit+width), player.xPos, parseInt(player.xPos+width)) && rangeCollision(yHit, parseInt(yHit+heigth), player.yPos, parseInt(player.yPos+heigth))){
+                if(player._id != eventData.id && rangeCollision(xHit, parseInt(xHit)+width, player.xPos, parseInt(player.xPos)+width) && rangeCollision(yHit, parseInt(yHit)+heigth, player.yPos, parseInt(player.yPos)+heigth)){
                     //Golpearon a este player
                     //Generar un evento de esto y guardarlo en la bd
 
