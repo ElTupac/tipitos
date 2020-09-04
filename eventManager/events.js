@@ -60,17 +60,28 @@ module.exports = {
                 playerId: eventData.id,
                 tipoEvento: eventData.event,
                 posX: eventData.xPos,
-                posY: eventData.yPos
+                posY: eventData.yPos,
+                time: eventData.time
             });
 
             ataque.save(ataque);
 
+            var hitteado = false;
             allPlayers.forEach(player => {
                 if(rangeCollision(xHit, (xHit+width), player.xPos, (player.xPos+width)) && rangeCollision(yHit, (yHit+heigth), player.yPos, (player.yPos+heigth))){
                     //Golpearon a este player
                     //Generar un evento de esto y guardarlo en la bd
 
+                    hitteado = true;
+                    const golpeado = new Event({
+                        playerId: player._id,
+                        tipoEvento: "golpeado",
+                        posX: ataque.posX,
+                        posY: ataque.posY,
+                        time: eventData.time
+                    });
 
+                    golpeado.save(golpeado);
                 }
             });
         }
