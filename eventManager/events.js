@@ -18,14 +18,12 @@ setInterval(() => {
 }, 250);
 
 module.exports = {
-    //hacer un getEventos
-    //hacer un postEvento
 
-    async getEventos(req, res){
-
+    async getEventos(req, res){ //Devuelve todos los ultimos eventos
+        return res.json(allEvents);
     },
 
-    async postEvento(req, res){
+    async postEvento(req, res){ //Envia un evento nuevo generado
         const eventData = req.body;
 
         if(eventData.event == "attack"){
