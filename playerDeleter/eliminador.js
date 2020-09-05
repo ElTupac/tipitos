@@ -36,7 +36,7 @@ db.once('open', function() {
             });
 
         });
-    }, 5000);
+    }, 2500);
 
     //Aprovecho y hago tambien aca el sistema para eliminar eventos en timeOut de la base
     //De esta forma no se entregaran eventos mas de una vez
@@ -60,8 +60,8 @@ db.once('open', function() {
     }, 125);
 });
 
-const MaxTimeOut = 5000;
-const EventTimeOut = 250;
+const MaxTimeOut = 2500;
+const EventTimeOut = 125;
 
 function timeNow(){
     const date = new Date();

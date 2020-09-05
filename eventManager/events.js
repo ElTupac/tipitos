@@ -10,12 +10,12 @@ var allEvents;
 setInterval(() => {
     Player.find()
     .then(players => allPlayers = players);
-}, 250);
+}, 125);
 
 setInterval(() => {
     Event.find()
     .then(events => allEvents = events);
-}, 250);
+}, 125);
 
 module.exports = {
 

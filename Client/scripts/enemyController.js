@@ -191,7 +191,7 @@ setTimeout(() => {
             })
             if(!exist && element._id != id) enemies.push(new Enemy(element.name, element._id, element.xPos, element.yPos, element.lastTime));
         });
-    }, 250);
+    }, 125);
 
     setInterval(() => {
         var h = 0;
@@ -200,5 +200,5 @@ setTimeout(() => {
                 enemies.splice(h, 1);
             }else h++;
         }
-    }, 2500);
+    }, 1500);
 }, 250);

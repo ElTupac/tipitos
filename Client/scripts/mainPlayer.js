@@ -23,7 +23,7 @@ window.onload = () => {
     var attackCD = false;
     var notDeath = true;
 
-    const intervalTime = 250;
+    const intervalTime = 125;
 
     const attackTimeCD = 500;
 
@@ -366,7 +366,7 @@ window.onload = () => {
 
             })
         });
-    }, 250);
+    }, 125);
 }
 
 const timePerMove = 25;

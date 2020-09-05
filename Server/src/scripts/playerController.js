@@ -4,7 +4,7 @@ var allPlayers;
 setInterval(() => {
     Player.find()
     .then(players => allPlayers = players)
-}, 250);
+}, 125);
 
 module.exports = {
     async newPlayer(req, res){
