@@ -25,10 +25,10 @@ module.exports = {
 
     async updatePosPlayer(req, res){
         const data = req.body;
-        const {theid} = req.params;
+        //const playerId = req.params.theid;
 
         try {
-            await Player.updateOne({_id: theid}, {
+            await Player.updateOne({_id: req.params.theid}, {
                 $set: {
                     xPos: data.xPos,
                     yPos: data.yPos,
@@ -38,6 +38,7 @@ module.exports = {
 
             return res.json(allPlayers);
         } catch (error) {
+            console.log("aca");
             console.log(error);
             return res.status(500);
         }

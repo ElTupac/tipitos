@@ -60,7 +60,7 @@ db.once('open', function() {
     }, 125);
 });
 
-const MaxTimeOut = 2500;
+const MaxTimeOut = (1000 * 60 * 2);
 const EventTimeOut = 125;
 
 function timeNow(){

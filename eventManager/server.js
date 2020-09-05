@@ -6,7 +6,7 @@ const routes = require('./routes');
 
 const PORT = process.env.PORT || 5000;
 
-const mongoCredentials = "mongodb+srv://temp_user:wrt11334mfSWIvBj@testcluster-c2vkw.mongodb.net/tipitos?retryWrites=true&w=majority";
+const mongoCredentials = "mongodb+srv://temp_user3:ihcARoA8MTjYiMnU@testcluster-c2vkw.mongodb.net/tipitos?retryWrites=true&w=majority";
 
 mongoose.connect(mongoCredentials, {
     useNewUrlParser: true,
